@@ -94,4 +94,9 @@ Naive decoding grows rapidly due to repeated K/V computation.
 KV Cache substantially reduces runtime.
 Flash Attention provides additional acceleration, especially for long contexts.
 
+<img width="691" height="470" alt="image" src="https://github.com/user-attachments/assets/6b160342-29cf-4235-a02d-572010dfd9a2" />
+
+
+
+
 
