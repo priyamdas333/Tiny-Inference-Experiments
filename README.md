@@ -25,12 +25,12 @@ Experiments
 # 1. Naive Autoregressive Decoding
 
 For every generated token, keys and values are recomputed for the entire sequence seen so far:
-
-[Step t:
+```
+Step t:
 K = X[:t+1] @ Wk
 V = X[:t+1] @ Wv
-]
 
+```
 This results in repeated computation and poor scalability.
 
 # 2. KV Cache
@@ -51,9 +51,9 @@ Standard optimization used in production LLMs
 # 3. KV Cache + Flash Attention
 
 Flash Attention uses PyTorch's:
-
+```
 torch.nn.functional.scaled_dot_product_attention()
-
+```
 which can dispatch to optimized GPU kernels.
 
 Benefits:
