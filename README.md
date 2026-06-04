@@ -42,11 +42,11 @@ Compute Kt, Vt
 Store in cache
 Attend over cached K,V
 
-Benefits:
+## Benefits:
 
-Eliminates redundant K/V projections
-Significantly improves decoding speed
-Standard optimization used in production LLMs
+- Eliminates redundant K/V projections
+- Significantly improves decoding speed
+- Standard optimization used in production LLMs
 
 # 3. KV Cache + Flash Attention
 
@@ -56,43 +56,47 @@ torch.nn.functional.scaled_dot_product_attention()
 ```
 which can dispatch to optimized GPU kernels.
 
-Benefits:
+## Benefits:
 
-Lower memory consumption
-Better GPU utilization
-Faster attention computation for long contexts
-Used during prompt processing (prefill) and increasingly during decoding
-Metrics Compared
+- Lower memory consumption
+- Better GPU utilization
+- Faster attention computation for long contexts
+- Used during prompt processing (prefill) and increasingly during decoding
 
-The benchmark evaluates:
 
-Runtime
+# The benchmark evaluates:
+
+## Runtime
 
 Measures total decoding time across varying sequence lengths.
 
-Expected trend:
-
+## Expected trend:
+```
 Naive  >  KV Cache  >  KV Cache + Flash Attention
-Peak GPU Memory
+```
+
+# Peak GPU Memory
 
 Measures maximum allocated GPU memory during execution.
 
-Expected trend:
-
+## Expected trend:
+```
 KV Cache  >  KV Cache + Flash Attention
+```
 
 Flash Attention reduces memory overhead by computing attention in blocks rather than storing large intermediate matrices.
 
-Performance Graphs
-Runtime vs Sequence Length
+# Performance Graphs
+
+## Runtime vs Sequence Length
 
 Shows how decoding latency scales with increasing context size.
 
-Expected observations:
+## Expected observations:
 
-Naive decoding grows rapidly due to repeated K/V computation.
-KV Cache substantially reduces runtime.
-Flash Attention provides additional acceleration, especially for long contexts.
+- Naive decoding grows rapidly due to repeated K/V computation.
+- KV Cache substantially reduces runtime.
+- Flash Attention provides additional acceleration, especially for long contexts.
 
 <img width="691" height="470" alt="image" src="https://github.com/user-attachments/assets/6b160342-29cf-4235-a02d-572010dfd9a2" />
 
